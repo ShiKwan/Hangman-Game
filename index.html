@@ -13,15 +13,69 @@
 
 </head>
 <body>
-	<h1>Welcome to Hangman! (Final Fantasy Edition!)
+	
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Title</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Game <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Life</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Score</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mode <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Easy</a></li>
+            <li><a href="#">Intermediate</a></li>
+            <li><a href="#">Hardcore</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Instructions</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
 	<div class="wrapper">
 		<div class="container">
+			<h2>Welcome to Hangman! </h2>
+			<h2>(Final Fantasy Edition!)</h2>
+			<div class="jumbotron">
+				<h1 id="wordToGuess"></h1>
+
+				<p><label>You guessed: </label><lable id="lblGuessed"></lable></p>
+				<p><a class="btn btn-primary btn-lg" href="#" role="button">Tips</a></p>
+			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<h2>Instruction</h2>
+					
+					<div class="row">
+						<div class="col-md-6">
+							
+						</div>
+						<div class="col-md-6">
+							
+						</div>
+					</div>
 				</div>
 				<div class="col-md-6">
 					<h2>Game play instructions</h2>
+
 					<label id="guessedWord"></label>
 				</div>
 			</div>			
@@ -93,8 +147,10 @@
 			gamePlay.charToGuess = createNewGuessChar(gamePlay.randomCharacter.name.length);
 			console.log(gamePlay.charToGuess);
 			gamePlay.charLeft = gamePlay.charToGuess.length;
-			userGuessed = [""];
-			document.querySelector("#guessedWord").innerHTML = gamePlay.charToGuess.join(" ") ;
+			userGuessed = [];
+
+			//document.querySelector("#lblGuessed").innerHTML = "[" + userGuessed.join(", ") + "]";
+			document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ") ;
 		}
 
 
@@ -122,18 +178,18 @@
 					for(var i = 0; i< gamePlay.randomCharacter.name.length; i++){
 						if(gamePlay.randomCharacter.name[i] === userGuess){
 							gamePlay.charToGuess[i] = userGuess;
+							
 							gamePlay.charLeft--;
 						}
 					}
-					document.querySelector("#guessedWord").innerHTML = gamePlay.charToGuess.join(" ");
-					if(userGuessed.indexOf(userGuess) == -1){
-						console.log("pushed " + userGuess + " into array");
-
-					}
+					document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ");
 					console.log(gamePlay.charToGuess);
 					console.log(gamePlay.charLeft);
 				}
+				if(userGuessed.indexOf(userGuess) == -1 && gamePlay.randomCharacter.name.indexOf(userGuess) == -1){
 				userGuessed.push(userGuess);	
+				document.querySelector("#lblGuessed").innerHTML = "[ " + userGuessed.join(", ") + " ]";
+				}
 				console.log("Entered words: " + userGuessed);
 				if(gamePlay.charLeft == 0){
 					gamePlay.score ++;
