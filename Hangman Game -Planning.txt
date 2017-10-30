@@ -1,0 +1,42 @@
+Hangman Game -Planning
+
+Game picks a random character name from an array. 
+
+Game Characters Theme:
+	2 Objects: 
+		Gameplay
+			- Mode (Integer)
+			- Life (Boolean)
+			- Score (Integer)
+			
+		Characters
+			- Name
+			- Game
+			- Bio
+			- Image
+			- Video
+
+
+
+1. HTML:
+	- Header
+		- Game Title
+	- Body
+		- Instruction Holder
+		- Image Holder
+		- Video Holder
+
+
+
+1. Javascript:
+	
+	i. Create gamePlay object
+		var gamePlay = {
+			mode : 0,
+			life : 5,
+			score : 0;
+		}
+	ii. Create array of characters
+		var characters = new Array();
+		character
+
