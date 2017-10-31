@@ -32,46 +32,55 @@
 		  <ul class="nav navbar-nav">
 		    <li class="active"><a href="#">Game <span class="sr-only">(current)</span></a></li>
 		    <li><a href="#">Life <label id="lblLife"></label></a></li>
-		    <li><a href="#">Help</a></li>
+		    
 		    <li><a href="#">Score <label id="lblScore" /></a></li>
 		    <li class="dropdown">
 		      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mode <span class="caret"></span></a>
 		      <ul class="dropdown-menu">
-		        <li id="easy"><a href="#">Easy</a></li>
-		        <li id="med" class="active"><a href="#">Intermediate</a></li>
-		        <li id="hard"><a href="#">Hardcore</a></li>
+		        <li id="easy"><a id="hypEasy" href="#" onclick="easyMode()">Easy</a></li>
+		        <li id="med" class="active"><a id="hypMedium" href="#" onclick="mediumMode()">Intermediate</a></li>
+		        <li id="hard"><a id="hypHard" href="#" onclick="hardMode()">Hardcore</a></li>
 		      </ul>
 		    </li>
 		  </ul>
 		  <ul class="nav navbar-nav navbar-right">
-		  	<li><a id="navAudio" class="play" href="#">Audio</a></li>
+		  	<li><a id="navAudio" class="play" href="#">
+			  		<span id="audio_on" class="glyphicon glyphicon-volume-down " aria-hidden="true"></span>
+			  		<span id="audio_mute" class="glyphicon glyphicon glyphicon-volume-off" aria-hidden="true"></span>
+		  			Audio
+		  	</a>
+		  </li>
 		    <li><a href="#">Instructions</a></li>
+		    <li><a href="#">Help</a></li>
 		  </ul>
 		</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-
-
 	<div class="wrapper">
 		<div class="container">
-			<h2>Welcome to Hangman! </h2>
-			<h2>(Final Fantasy Edition!)</h2>
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Welcome to Hangman! </h2>
+					<h2>(Final Fantasy Edition!)</h2>
+				</div>
+				<div class="col-md-8">
+					<div class="bit-background-container text-right">
+						<image class="bit-background" src="assets/images/8bits_background.jpg"/>
+						<img class="walking-chocobo" src="assets/images/GoldChocobo.gif" />
+					</div>
+				</div>
+			</div>
 			<div class="jumbotron">
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-5">
 						<img id="imgCharHead" width="100%" class="img-thumbnail" scr="" alt="character image" />
 					</div>
-					<div class="col-md-9">
+					<div class="col-md-7">
 						<h1 id="wordToGuess"></h1>
 						<p><label>You guessed: </label><lable id="lblGuessed"></lable></p>
 						<p><a class="btn btn-primary btn-lg" href="#" role="button">Tips</a></p>
 					</div>
-				</div>
-				<div class="row">
-					<div class="bit-background-container col-md-12">
-						<image class="bit-background" src="assets/images/8bits_background.jpg"/>
-						<img class="walking-chocobo" src="assets/images/GoldChocobo.gif" />
-					</div>
+					
 				</div>
 			</div>
 			<div id="divCharInfo" class="row">
@@ -83,20 +92,12 @@
 				<div class="col-md-6">
 					<table id="tblCharInfo" class="table">
 						<tr>
-							<td>
-								<label>Name </label>
-							</td>
-							<td>
-								<label id="lblName" />
-							</td>
+							<td><label>Name </label></td>
+							<td><label id="lblName" /></td>
 						</tr>
 						<tr>
-							<td>
-								<label>From </label>
-							</td>
-							<td>
-								<label id="lblFrom" />
-							</td>
+							<td><label>From </label></td>
+							<td><label id="lblFrom" /></td>
 						</tr>
 						<tr>
 							<td>
@@ -130,203 +131,14 @@
 	<audio id="sndButton" src="assets/audio/button_click.wav" preload="auto"></audio>
 	<audio id="sndChocoboWark" src="assets/audio/chocobo_wark.mp3" preload="auto"></audio>
 	<audio id="sndCincoDeChocobo" src="assets/audio/cinco_de_chocobo.mp3" preload="auto"></audio>
-
-
 	
 
-
-	<script type="text/JavaScript">
-
-		var gamePlay = {
-			mode : 0,
-			life : 5,
-			score : 0,
-			randomCharacter : "",
-			charToGuess : "",
-			charLeft : ""
-		}
-		var character = new Array();
-
-		backgroundAudio = new Audio("assets/audio/cinco_de_chocobo.mp3");
-		chocoboWark = new Audio("assets/audio/chocobo_wark.mp3");
-		backgroundAudio.addEventListener('ended', function() {
-		    this.currentTime = 0;
-		    this.play();
-		}, false);
-		backgroundAudio.play();	
-		
-
-		document.getElementById("navAudio").addEventListener("click", pauseAudio);
-
-		function pauseAudio(){
-			if(document.getElementById("navAudio").classList.contains('play')){
-				document.getElementById("navAudio").classList.add('mute');
-				document.getElementById("navAudio").classList.remove('play');
-				backgroundAudio.pause();
-				backgroundAudio.currentTime = 0;
-			}else if(document.getElementById("navAudio").classList.contains('mute')){
-				document.getElementById("navAudio").classList.add('play');
-				document.getElementById("navAudio").classList.remove('mute');
-				backgroundAudio.play();	
-			}
-		}
-
-		document.getElementById("")
-
-		//Create characters here.
-		var char1 = {
-			name: "tifa",
-			fullname: "Tifa Lockhart",
-			game: "Final Fantasy 7",
-			bio: "Tifa Lockhart is a playable character in Final Fantasy VII, and the deuteragonist of Final Fantasy VII: Advent Children. In Dirge of Cerberus -Final Fantasy VII- and Crisis Core -Final Fantasy VII-, she plays a supportive role. Tifa is Cloud Strife's childhood friend, but lost contact with him years ago. When she meets him again, she convinces him to join the resistance group she is a member of, AVALANCHE, to fight Shinra Electric Power Company. Tifa supports Cloud as his comrade and helps him fight his nemesis Sephiroth, bearing the same hatred for him as Cloud does due to the destruction of their hometown.",
-			img: "assets/images/tifa.jpg",
-			clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/k70IWHiXl18" frameborder="0" allowfullscreen></iframe>',
-			wiki: 'http://finalfantasy.wikia.com/wiki/Tifa_Lockhart',
-			gif: "assets/images/tifa.gif"
-
-		}
-		var char2 = {
-			name: "sephiroth",
-			fullname: "Sephiroth",
-			game: "Final Fantasy 7",
-			bio: "Sephiroth is the main antagonist of Final Fantasy VII, and one of the major antagonists in its extended universe. Before his fall from grace, Sephiroth was one of the most lauded success stories of the Shinra Electric Power Company's SOLDIER program. A great warrior idolized by the public and infantrymen alike for his strength and discipline in combat, Sephiroth's many successes in the field of battle during the conflicts surrounding the Shinra Electric Power Company's bid for global domination led to his status as a celebrity war hero and the poster boy for both the Shinra Military and the company's SOLDIER program. In spin-off appearances, Sephiroth is depicted as Cloud Strife's archenemy, and is seen as a symbol of Cloud's troubled past that haunts his life.",
-			img: "assets/images/sephiroth.jpg",
-			clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Z-rkY4s7xf4" frameborder="0" allowfullscreen></iframe>',
-			wiki: 'http://finalfantasy.wikia.com/wiki/Sephiroth_(Final_Fantasy_VII)',
-			gif: "assets/images/sephiroth.gif"
-		}
-		var char3 = {
-			name: "cloud",
-			fullname: "Cloud Strife",
-			game: "Final Fantasy 7",
-			bio: "Cloud Strife is the main protagonist in Final Fantasy VII and Final Fantasy VII: Advent Children, and also appears in the spin-off games of the Compilation of Final Fantasy VII, including Dirge of Cerberus -Final Fantasy VII- and Crisis Core -Final Fantasy VII-, as a supporting character. He is to be the main character again for Final Fantasy VII Remake. An arrogant and proud swordsman at first, Cloud introduces himself as a former member of an elite warrior unit called SOLDIER who has turned mercenary, and uninterested in anything beyond his hired task at hand. He later discovers the truth about his past and, with the help of his friends, learns there is more to being a hero than possessing physical strength and fame, developing compassion for the world and people he fights to protect.", 
-			img: "assets/images/cloud.jpg",
-			clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/rQam5uoWxFE" frameborder="0" allowfullscreen></iframe>',
-			wiki: "http://finalfantasy.wikia.com/wiki/Cloud_Strife",
-			gif: "assets/images/cloud2.gif"
-
-		}
-
-		//log gameplay information
-		function logGamePlay(gamePlay) {
-			console.log("GamePlay Log : " , gamePlay);
-		}
-
-		//log character information
-		function logCharacter(char){
-			console.log(" Character Log :", char);
-		}
-
-		// create underscore "_" on the word to guess
-		function createNewGuessChar(charLength){
-		var charToGuess = new Array();
-		for(var i = 0; i< charLength; i++){
-			charToGuess[i] = "_";
-		}
-		return charToGuess;
-		}
-		function logArrayElements(element, index, array) {
-			console.log('a[' + index + '] = ' + element);
-		}
-		
-		var userGuessed = new Array();
-
-		function startGame(char){
-			chocoboWark.play();
-			gamePlay.randomCharacter = char[Math.floor(Math.random() * char.length)];
-			logCharacter(gamePlay.randomCharacter);
-			gamePlay.charToGuess = createNewGuessChar(gamePlay.randomCharacter.name.length);
-			console.log(gamePlay.charToGuess);
-			gamePlay.charLeft = gamePlay.charToGuess.length;
-			userGuessed = [];
-			document.getElementById("imgCharHead").src = gamePlay.randomCharacter.img;
-			document.querySelector("#lblLife").innerHTML = gamePlay.life;
-			document.querySelector("#lblGuessed").innerHTML = "[ ]";
-			document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ") ;
-			document.getElementById("divCharInfo").style.display = "none";
-		}
-
-
-		logGamePlay(gamePlay);
-		//Push each character into the array. 
-		character.push(char1);
-		character.push(char2);
-		character.push(char3);
-
-		console.log(gamePlay.mode);
-		console.log(gamePlay.life);
-		console.log(gamePlay.score);
-
-		logCharacter(character);
-		console.log(character.length);
-
-		startGame(character);
-
-		
-		document.onkeyup = function(event) {
-			var userGuess = event.key.toLowerCase();
-				document.getElementById("sndButton").play();
-				//if the letter appears in randomCharacter's name, and not in userGuessed
-				if(gamePlay.randomCharacter.name.indexOf(userGuess) > -1 && userGuessed.indexOf(userGuess) == -1){
-					chocoboWark.play();
-					for(var i = 0; i< gamePlay.randomCharacter.name.length; i++){
-						if(gamePlay.randomCharacter.name[i] === userGuess){
-							gamePlay.charToGuess[i] = userGuess;
-						}
-					}
-					var charLeftHolder = 0;
-					for(var i = 0; i< gamePlay.charToGuess.length; i++){
-						if(gamePlay.charToGuess[i] == "_"){
-							charLeftHolder++;
-						}
-						gamePlay.charLeft = charLeftHolder;
-					}
-
-					document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ");
-					console.log(gamePlay.charToGuess);
-					console.log("Character(s) left: " + gamePlay.charLeft);
-				}
-				if(userGuessed.indexOf(userGuess) == -1 && gamePlay.randomCharacter.name.indexOf(userGuess) == -1){
-				document.getElementById("sndButton").play();
-				userGuessed.push(userGuess);	
-				document.querySelector("#lblGuessed").innerHTML = "[ " + userGuessed.join(", ") + " ]";
-				}
-				console.log("Entered words: " + userGuessed);
-				if(gamePlay.charLeft == 0){
-					gamePlay.score ++;
-					console.log("You win!")
-					document.getElementById("divCharInfo").style.display = "block";
-					document.getElementById("imgChar").src = gamePlay.randomCharacter.img;
-					document.querySelector("#lblName").innerHTML = gamePlay.randomCharacter.fullname;
-					document.querySelector("#lblMore").innerHTML = gamePlay.randomCharacter.bio;
-					document.querySelector("#lblFrom").innerHTML = gamePlay.randomCharacter.game;
-					document.getElementById("pClips").innerHTML = gamePlay.randomCharacter.clip;
-					document.getElementById("imgChar").src = gamePlay.randomCharacter.gif;
-					document.querySelector("#lblWiki").innerHTML = gamePlay.randomCharacter.wiki;
-
-					console.log(gamePlay.randomCharacter.bio);
-					console.log(gamePlay.randomCharacter.game);
-					logGamePlay(gamePlay);
-					console.log("Play again? (y/n)");
-				}
-				if(gamePlay.charLeft ==0 && (event.key === "y")){
-					startGame(character);
-				}else if(gamePlay.charLeft ==0 && (event.key === "n")){
-					console.log("Thank you for playing!");
-				}
-			
-		}
-		/* NOTE: Test the randomness
-		for(var i =0; i< 20; i++){
-			var randomCharacter = character[Math.floor(Math.random() *character.length)];
-			console.log(randomCharacter.name);
-		}
-		*/
-	</script>
 	<!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+	
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+	crossorigin="anonymous"></script>
+	<script src="assets/javascript/game.js"> </script>
 </body>
 </html>
