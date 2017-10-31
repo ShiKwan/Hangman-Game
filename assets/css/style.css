@@ -1,0 +1,14 @@
+.bit-background{
+	width:100%;
+}
+
+.bit-background-container{
+	position: relative;
+}
+
+.walking-chocobo{
+	width: 13%;
+    position: absolute;
+    right: 0;
+    bottom: 190px;
+}
