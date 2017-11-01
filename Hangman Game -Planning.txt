@@ -1,5 +1,30 @@
 Hangman Game -Planning
 
+
+
+To Do:
+	HIGH PRIORITY
+	- progress bar (chocobo fall of the cliff)
+		- add padding via transition. 
+		- https://www.w3schools.com/cssref/css3_pr_transition.asp
+
+	- get help to work
+		 1. add a new numeric variable in gamePlay object
+	
+	MED PRIORITY
+	- create a new function to take care of game play progress
+		- play sound
+		- life
+		- message	
+
+	LOW PRIORITY
+	- add more charaters
+	- add instruction page
+
+
+
+
+
 Game picks a random character name from an array. 
 
 Game Characters Theme:
@@ -39,4 +64,5 @@ Game Characters Theme:
 	ii. Create array of characters
 		var characters = new Array();
 		character
+
 

@@ -1,13 +1,15 @@
 var gamePlay = {
 	mode : 1,
-	life : 5,
+	life : 10,
 	score : 0,
+	try : 10,
 	randomCharacter : "",
 	charToGuess : "",
 	charLeft : ""
 }
 var character = new Array();
 var userGuessed = new Array();
+var initialLife = gamePlay.life;
 
 backgroundAudio = new Audio("assets/audio/cinco_de_chocobo.mp3");
 chocoboWark = new Audio("assets/audio/chocobo_wark.mp3");
@@ -65,6 +67,8 @@ function logArrayElements(element, index, array) {
 
 function easyMode(){
 	gamePlay.mode = 0;
+	gamePlay.try = 20;
+	gamePlay.score = 0;
 	document.getElementById("easy").classList.add('active');
 	document.getElementById("med").classList.remove('active');
 	document.getElementById("hard").classList.remove('active');
@@ -73,6 +77,8 @@ function easyMode(){
 
 function mediumMode(){
 	gamePlay.mode = 0;
+	gamePlay.try = 15;
+	gamePlay.score = 0;
 	document.getElementById("easy").classList.remove('active');
 	document.getElementById("med").classList.add('active');
 	document.getElementById("hard").classList.remove('active');
@@ -81,6 +87,7 @@ function mediumMode(){
 
 function hardMode(){
 	gamePlay.mode = 0;
+	gamePlay.try = 10;
 	document.getElementById("easy").classList.remove('active');
 	document.getElementById("med").classList.remove('active');
 	document.getElementById("hard").classList.add('active');
@@ -95,6 +102,8 @@ function startGame(char){
 	console.log(gamePlay.charToGuess);
 	gamePlay.charLeft = gamePlay.charToGuess.length;
 	userGuessed = [];
+	$("#msg-center").hide()
+	$("#msg-center").text = ""
 	document.getElementById("imgCharHead").src = gamePlay.randomCharacter.img;
 	document.querySelector("#lblLife").innerHTML = gamePlay.life;
 	document.querySelector("#lblScore").innerHTML = gamePlay.score;
@@ -102,6 +111,10 @@ function startGame(char){
 	document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ") ;
 	document.getElementById("divCharInfo").style.display = "none";
 }
+
+//NOTES: 337 pixel background 
+
+
 
 //Create characters here.
 var char1 = {
@@ -151,8 +164,8 @@ console.log(character.length);
 
 startGame(character);
 
-
-document.onkeyup = function(event) {
+if(gamePlay.life > 0 ) {
+	document.onkeyup = function(event) {
 	var userGuess = event.key.toLowerCase();
 		if(document.getElementById("navAudio").classList.contains('play')){
 				document.getElementById("sndButton").play();
@@ -181,13 +194,18 @@ document.onkeyup = function(event) {
 			console.log("Character(s) left: " + gamePlay.charLeft);
 		}
 		if(userGuessed.indexOf(userGuess) == -1 && gamePlay.randomCharacter.name.indexOf(userGuess) == -1){
-		document.getElementById("sndButton").play();
-		userGuessed.push(userGuess);	
+		gamePlay.try--;
+		var percentageTry = (initialLife-gamePlay.try)/initialLife *330;
+
+		$(".walking-chocobo").attr("style", "transform: translate(-" + percentageTry + "px ,0 ); -webkit-transition: all 2s ease-in-out;");
+        userGuessed.push(userGuess);	
+		document.querySelector("#lblLife").innerHTML = gamePlay.life;
 		document.querySelector("#lblGuessed").innerHTML = "[ " + userGuessed.join(", ") + " ]";
 		}
 		console.log("Entered words: " + userGuessed);
 		if(gamePlay.charLeft == 0){
 			gamePlay.score ++;
+			document.querySelector("#lblScore").innerHTML = gamePlay.score;
 			console.log("You win!")
 			document.getElementById("divCharInfo").style.display = "block";
 			document.getElementById("imgChar").src = gamePlay.randomCharacter.img;
@@ -201,6 +219,8 @@ document.onkeyup = function(event) {
 			console.log(gamePlay.randomCharacter.bio);
 			console.log(gamePlay.randomCharacter.game);
 			logGamePlay(gamePlay);
+			$("#msg-center").show()
+			$("#msg-center").append( "Press 'y' to continue, 'n' to quit.  (y/n)");
 			console.log("Play again? (y/n)");
 		}
 		if(gamePlay.charLeft ==0 && (event.key === "y")){
@@ -209,4 +229,5 @@ document.onkeyup = function(event) {
 			console.log("Thank you for playing!");
 		}
 	
+	}
 }
