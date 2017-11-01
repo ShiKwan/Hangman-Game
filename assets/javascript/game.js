@@ -10,6 +10,7 @@ var gamePlay = {
 var character = new Array();
 var userGuessed = new Array();
 var initialLife = gamePlay.life;
+var initialTry = gamePlay.try;
 
 backgroundAudio = new Audio("assets/audio/cinco_de_chocobo.mp3");
 chocoboWark = new Audio("assets/audio/chocobo_wark.mp3");
@@ -101,10 +102,12 @@ function startGame(char){
 	gamePlay.charToGuess = createNewGuessChar(gamePlay.randomCharacter.name.length);
 	console.log(gamePlay.charToGuess);
 	gamePlay.charLeft = gamePlay.charToGuess.length;
+	gamePlay.try = initialTry;
 	userGuessed = [];
 	$("#msg-center").hide()
 	$("#msg-center").text = ""
 	document.getElementById("imgCharHead").src = gamePlay.randomCharacter.img;
+	document.querySelector("#lblTries").innerHTML = gamePlay.try;
 	document.querySelector("#lblLife").innerHTML = gamePlay.life;
 	document.querySelector("#lblScore").innerHTML = gamePlay.score;
 	document.querySelector("#lblGuessed").innerHTML = "[ ]";
@@ -166,68 +169,96 @@ startGame(character);
 
 if(gamePlay.life > 0 ) {
 	document.onkeyup = function(event) {
-	var userGuess = event.key.toLowerCase();
-		if(document.getElementById("navAudio").classList.contains('play')){
-				document.getElementById("sndButton").play();
-		}
-		//if the letter appears in randomCharacter's name, and not in userGuessed
-		if(gamePlay.randomCharacter.name.indexOf(userGuess) > -1 && userGuessed.indexOf(userGuess) == -1){
+		var userGuess = event.key.toLowerCase();
+		if(gamePlay.try >0 || (gamePlay.try ==0 && userGuess == "y") || (gamePlay.try == 0 && userGuess == "n")) {
 			if(document.getElementById("navAudio").classList.contains('play')){
-				chocoboWark.play();
+					document.getElementById("sndButton").play();
 			}
+			if(gamePlay.try == 0){
+				console.log("gameplay life is 0");
+				document.querySelector("#lblLife").innerHTML = gamePlay.life;
+				document.getElementById("msg-center").style.display = "initial";
+				document.getElementById("msg-center").innerHTML = "Le chocobo went down the cliff into water.. Press 'y' to continue, 'n' to quit.  (y/n)";
+				if(event.key === "y"){
+					startGame(character);
+
+				}else if(event.key === "n"){
+					console.log("Thank you for playing!");
+				}
+			}else 
 			
-			for(var i = 0; i< gamePlay.randomCharacter.name.length; i++){
-				if(gamePlay.randomCharacter.name[i] === userGuess){
-					gamePlay.charToGuess[i] = userGuess;
+			//if the letter appears in randomCharacter's name, and not in userGuessed
+			if(gamePlay.randomCharacter.name.indexOf(userGuess) > -1 && userGuessed.indexOf(userGuess) == -1){
+				if(document.getElementById("navAudio").classList.contains('play')){
+					chocoboWark.play();
+				}
+				
+				for(var i = 0; i< gamePlay.randomCharacter.name.length; i++){
+					if(gamePlay.randomCharacter.name[i] === userGuess){
+						gamePlay.charToGuess[i] = userGuess;
+					}
+				}
+				var charLeftHolder = 0;
+				for(var i = 0; i< gamePlay.charToGuess.length; i++){
+					if(gamePlay.charToGuess[i] == "_"){
+						charLeftHolder++;
+					}
+					gamePlay.charLeft = charLeftHolder;
+				}
+
+				document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ");
+				console.log(gamePlay.charToGuess);
+				console.log("Character(s) left: " + gamePlay.charLeft);
+			}
+			if(userGuessed.indexOf(userGuess) == -1 && gamePlay.randomCharacter.name.indexOf(userGuess) == -1){
+			gamePlay.try--;
+			var percentageTry = (initialLife-gamePlay.try)/initialLife *310;
+
+			$(".walking-chocobo").attr("style", "transform: translate(-" + percentageTry + "px ,0 ); -webkit-transition: all 2s ease-in-out;");
+	        userGuessed.push(userGuess);	
+	        document.querySelector("#lblTries").innerHTML = gamePlay.try;
+			document.querySelector("#lblLife").innerHTML = gamePlay.life;
+			document.querySelector("#lblGuessed").innerHTML = "[ " + userGuessed.join(", ") + " ]";
+			}
+			if(gamePlay.try > 0){
+				console.log("Entered words: " + userGuessed);
+				if(gamePlay.charLeft == 0){
+					gamePlay.score ++;
+					document.querySelector("#lblScore").innerHTML = gamePlay.score;
+					console.log("You win!")
+					document.getElementById("divCharInfo").style.display = "block";
+					document.getElementById("imgChar").src = gamePlay.randomCharacter.img;
+					document.querySelector("#lblName").innerHTML = gamePlay.randomCharacter.fullname;
+					document.querySelector("#lblMore").innerHTML = gamePlay.randomCharacter.bio;
+					document.querySelector("#lblFrom").innerHTML = gamePlay.randomCharacter.game;
+					document.getElementById("pClips").innerHTML = gamePlay.randomCharacter.clip;
+					document.getElementById("imgChar").src = gamePlay.randomCharacter.gif;
+					document.querySelector("#lblWiki").innerHTML = gamePlay.randomCharacter.wiki;
+
+					console.log(gamePlay.randomCharacter.bio);
+					console.log(gamePlay.randomCharacter.game);
+					logGamePlay(gamePlay);
+					document.getElementById("msg-center").style.display = "block";
+					document.getElementById("msg-center").innerHTML =  "Press 'y' to continue, 'n' to quit.  (y/n)";
+					console.log("Play again? (y/n)");
+					if(gamePlay.charLeft ==0 && (event.key === "y")){
+						startGame(character);
+					}else if(gamePlay.charLeft ==0 && (event.key === "n")){
+						console.log("Thank you for playing!");
+					}
+				}
+			}else if(gamePlay.try == 0){
+				console.log("gameplay life is 0");
+				gamePlay.life--;
+				document.querySelector("#lblLife").innerHTML = gamePlay.life;
+				document.getElementById("msg-center").style.display = "initial";
+				document.getElementById("msg-center").innerHTML = "Le chocobo went down the cliff into water.. Press 'y' to continue, 'n' to quit.  (y/n)";
+				if(event.key === "y"){
+					startGame(character);
+				}else if(event.key === "n"){
+					console.log("Thank you for playing!");
 				}
 			}
-			var charLeftHolder = 0;
-			for(var i = 0; i< gamePlay.charToGuess.length; i++){
-				if(gamePlay.charToGuess[i] == "_"){
-					charLeftHolder++;
-				}
-				gamePlay.charLeft = charLeftHolder;
-			}
-
-			document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ");
-			console.log(gamePlay.charToGuess);
-			console.log("Character(s) left: " + gamePlay.charLeft);
-		}
-		if(userGuessed.indexOf(userGuess) == -1 && gamePlay.randomCharacter.name.indexOf(userGuess) == -1){
-		gamePlay.try--;
-		var percentageTry = (initialLife-gamePlay.try)/initialLife *330;
-
-		$(".walking-chocobo").attr("style", "transform: translate(-" + percentageTry + "px ,0 ); -webkit-transition: all 2s ease-in-out;");
-        userGuessed.push(userGuess);	
-		document.querySelector("#lblLife").innerHTML = gamePlay.life;
-		document.querySelector("#lblGuessed").innerHTML = "[ " + userGuessed.join(", ") + " ]";
-		}
-		console.log("Entered words: " + userGuessed);
-		if(gamePlay.charLeft == 0){
-			gamePlay.score ++;
-			document.querySelector("#lblScore").innerHTML = gamePlay.score;
-			console.log("You win!")
-			document.getElementById("divCharInfo").style.display = "block";
-			document.getElementById("imgChar").src = gamePlay.randomCharacter.img;
-			document.querySelector("#lblName").innerHTML = gamePlay.randomCharacter.fullname;
-			document.querySelector("#lblMore").innerHTML = gamePlay.randomCharacter.bio;
-			document.querySelector("#lblFrom").innerHTML = gamePlay.randomCharacter.game;
-			document.getElementById("pClips").innerHTML = gamePlay.randomCharacter.clip;
-			document.getElementById("imgChar").src = gamePlay.randomCharacter.gif;
-			document.querySelector("#lblWiki").innerHTML = gamePlay.randomCharacter.wiki;
-
-			console.log(gamePlay.randomCharacter.bio);
-			console.log(gamePlay.randomCharacter.game);
-			logGamePlay(gamePlay);
-			$("#msg-center").show()
-			$("#msg-center").append( "Press 'y' to continue, 'n' to quit.  (y/n)");
-			console.log("Play again? (y/n)");
-		}
-		if(gamePlay.charLeft ==0 && (event.key === "y")){
-			startGame(character);
-		}else if(gamePlay.charLeft ==0 && (event.key === "n")){
-			console.log("Thank you for playing!");
-		}
-	
+		}	
 	}
 }
