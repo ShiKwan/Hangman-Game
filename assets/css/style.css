@@ -1,11 +1,42 @@
+html, body{
+	font-family: 'Concert One', cursive;
+	height:100%;
+}
+.wrapper {
+	background-image: url(../images/background.gif);
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100%;
+
+}
+nav {
+	font-family: 'Aldrich', sans-serif;
+}
+
+.jumbotron{
+	transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.jumbotron:hover{
+	opacity: 0.9;
+}
 .bit-background{
 	width:45%;
 }
 
 .bit-background-container{
 	position: relative;
+
 }
 
+.guess-container{
+	background-color: azure;
+	margin-top:50px;
+	padding: 20px 0 20px 0;
+}
 .walking-chocobo{
 	width: 7%;
     position: absolute;
@@ -13,9 +44,50 @@
     bottom: 60px;
 }
 
+.walking-chocobo.chocobo-hide{
+	display: none;
+}
+
+.sleeping-chocobo.chocobo-hide{
+	display: none;
+}
+
+.sleeping-chocobo{
+	width: 7%;
+    position: absolute;
+    right: 300px;
+    bottom: 60px;
+}
+.sleeping-chocobo.slidedown{
+	transform: translate(0 ,50px ); 
+	-webkit-transition: all 2s ease-in-out;
+}
+
+.cover-hide, .wrapper-hide{
+	display:none;
+}
+
 #audio_on {
 	display: inline;
 }
 #audio_mute {
 	display: none;
+}
+
+.cover{
+  background-size: cover;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+
+.navbar-fixed-bottom {
+	width: 100%;
+	border-radius: 0;
+	height:auto;
+	border-top: solid gray 1px;
+	padding-top:25px;
+	padding-bottom: 25px;
+	position: relative;
 }

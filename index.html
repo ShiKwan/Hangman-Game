@@ -10,12 +10,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="icon" type="image/jpg" href="http://www.dalessandroegalli.com/images/events/thumbs/236.jpg?t=1452720982">
-
+	<link href="https://fonts.googleapis.com/css?family=Aldrich|Concert+One" rel="stylesheet">
 </head>
 <body>
 	
 	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
+	  <div class="container-fluid clearfix">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -24,7 +24,7 @@
 		    <span class="icon-bar"></span>
 		    <span class="icon-bar"></span>
 		  </button>
-		  <a class="navbar-brand" href="#">Title</a>
+		  <a class="navbar-brand" href="#">Hangman Game</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,7 +57,7 @@
 		</div><!-- /.container-fluid -->
 	</nav>
 	<div class="wrapper">
-		<div id="msg-center" class="alert alert-info text-center" role="alert">Message Holder</div>
+		<div id="msg-center" class="alert alert-warning text-center" role="alert">Message Holder</div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
@@ -68,59 +68,72 @@
 				<div class="col-md-8">
 					<div class="bit-background-container text-right">
 						<image class="bit-background" src="assets/images/8bits_background.jpg"/>
-						<img class="walking-chocobo" src="assets/images/GoldChocobo.gif" />
+						<img id="imgWalkingChocobo" class="walking-chocobo" src="assets/images/GoldChocobo.gif" />
+						<img id="imgSleepingChocobo" class="sleeping-chocobo chocobo-hide" src="assets/images/sleeping_chocobo.gif" />
 					</div>
 				</div>
 			</div>
-			<div class="jumbotron">
-				<div class="row">
-					<div class="col-md-5">
+				<div class="row guess-container">
+					<div class="col-sm-4">
 						<img id="imgCharHead" width="100%" class="img-thumbnail" scr="" alt="character image" />
+						<panel class="text-center">
+							<h1 id="wordToGuess"></h1>
+							<p><label>You guessed: </label><lable id="lblGuessed"></lable></p>
+							<p><label>Tries left: </label><label id="lblTries"></label></p>
+							<p><a id="hypTips" class="btn btn-primary btn-lg" href="#" role="button">Tips <label id="lblTips"></label></a></p>
+						</panel>
 					</div>
-					<div class="col-md-7">
-						<h1 id="wordToGuess"></h1>
-						<p><label>You guessed: </label><lable id="lblGuessed"></lable></p>
-						<p><label>Tries left: </label><label id="lblTries"></label></p>
-						<p><a class="btn btn-primary btn-lg" href="#" role="button">Tips</a></p>
+					<div class="col-md-8">
+						<div id="divCharInfo" class="row">
+							<table id="tblCharInfo" class="table">
+								<tr>
+									<td><label>Name </label></td>
+									<td><label id="lblName" /></td>
+								</tr>
+								<tr>
+									<td><label>From </label></td>
+									<td><label id="lblFrom" /></td>
+								</tr>
+								<tr>
+									<td>
+										<label>More </label>
+									</td>
+									<td><label id="lblMore" /></td>
+								</tr>
+								<tr>
+									<td><label>Clips </label></td>
+									<td><p id="pClips"></p></td>
+								</tr>
+								<tr>
+									<td><label>Wiki </label></td>
+									<td><label id="lblWiki" /></td>
+								</tr>
+							</table>
+						</div>
 					</div>
-					
-				</div>
+
 			</div>
-			<div id="divCharInfo" class="row">
+			<div id="divCharInfo" style="visibility: hidden;" class="row">
 				<div class="col-md-6">
 					<div class="jumbotron text-center">
 						<img id="imgChar"/>
 					</div>		
 				</div>
 				<div class="col-md-6">
-					<table id="tblCharInfo" class="table">
-						<tr>
-							<td><label>Name </label></td>
-							<td><label id="lblName" /></td>
-						</tr>
-						<tr>
-							<td><label>From </label></td>
-							<td><label id="lblFrom" /></td>
-						</tr>
-						<tr>
-							<td>
-								<label>More </label>
-							</td>
-							<td><label id="lblMore" /></td>
-						</tr>
-						<tr>
-							<td><label>Clips </label></td>
-							<td><p id="pClips"></p></td>
-						</tr>
-						<tr>
-							<td><label>Wiki </label></td>
-							<td><label id="lblWiki" /></td>
-						</tr>
-					</table>
+
 				</div>
 			</div>		
 		</div>
 	</div>
+	<img src="assets/images/win.png" class="cover cover-hide" />
+	<!--Copyright-->
+	<footer class="navbar page-footer text-center navbar-fixed-bottom">
+	    <div class="footer-copyright">
+	        <div class="container-fluid">
+	            <p> &copy; Copyright 2017 Shi-Kwan Tan</p>
+	        </div>
+	    </div>
+	</footer>
 	<audio id="sndButton" src="assets/audio/button_click.wav" preload="auto"></audio>
 	<audio id="sndChocoboWark" src="assets/audio/chocobo_wark.mp3" preload="auto"></audio>
 	<audio id="sndCincoDeChocobo" src="assets/audio/cinco_de_chocobo.mp3" preload="auto"></audio>
