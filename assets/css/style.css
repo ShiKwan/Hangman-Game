@@ -33,6 +33,10 @@ nav {
 	position: relative;
 
 }
+.img-thumbnail{
+	max-width: 300px;
+	max-height: 400px;
+}
 
 .guess-container{
 	background-color: azure;
