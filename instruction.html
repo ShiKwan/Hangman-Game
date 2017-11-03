@@ -24,22 +24,14 @@
 		    <span class="icon-bar"></span>
 		    <span class="icon-bar"></span>
 		  </button>
-		  <a class="navbar-brand" href="#">Hangman Game</a>
+		  <a class="navbar-brand" href="index.html">Hangman Game</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		  <ul class="nav navbar-nav">
 		    <li class="active"><a href="index.html">Game <span class="sr-only">(current)</span></a></li>
-		    <li><a href="#"><span class="glyphicon glyphicon-heart " aria-hidden="true"></span> <label id="lblLife"></label></a></li>
-		    
-		    <li><a href="#">Score <label id="lblScore" /></a></li>
-		    <li class="dropdown">
-		      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mode <span class="caret"></span></a>
-		      <ul class="dropdown-menu">
-		        <li id="easy"><a id="hypEasy" href="#" onclick="easyMode()">Easy</a></li>
-		        <li id="med" class="active"><a id="hypMedium" href="#" onclick="mediumMode()">Intermediate</a></li>
-		        <li id="hard"><a id="hypHard" href="#" onclick="hardMode()">Fast Pace</a></li>
+		    <li><a href="#"><span class="glyphicon glyphicon-heart " aria-hidden="true"></span><label id="lblLife"></label></a></li>
 		      </ul>
 		    </li>
 		  </ul>
@@ -50,7 +42,7 @@
 		  			Audio
 		  	</a>
 		  </li>
-		    <li><a href="instruction.html"><span class="glyphicon glyphicon-wrench " aria-hidden="true"></span> Instruction</a></li>
+		    <li><a href="instruction.html">Instructions</a></li>
 		  </ul>
 		</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
@@ -72,60 +64,51 @@
 					</div>
 				</div>
 			</div>
-				<div class="row guess-container">
-					<div class="col-sm-4">
-						<img id="imgCharHead" width="100%" class="img-thumbnail" scr="" alt="character image" />
-						<panel class="text-center">
-							<h1 id="wordToGuess"></h1>
-							<p><label>You guessed: </label><lable id="lblGuessed"></lable></p>
-							<p><label>Tries left: </label><label id="lblTries"></label></p>
-							<p><a id="hypTips" class="btn btn-primary btn-lg" href="#" role="button">Tips <label id="lblTips"></label></a></p>
-						</panel>
-					</div>
-					<div class="col-md-8">
-						<div id="divCharInfo" class="row">
-							<table id="tblCharInfo" class="table">
-								<tr>
-									<td><label>Name </label></td>
-									<td><label id="lblName" /></td>
-								</tr>
-								<tr>
-									<td><label>From </label></td>
-									<td><label id="lblFrom" /></td>
-								</tr>
-								<tr>
-									<td>
-										<label>More </label>
-									</td>
-									<td><label id="lblMore" /></td>
-								</tr>
-								<tr>
-									<td><label>Clips </label></td>
-									<td><p id="pClips"></p></td>
-								</tr>
-								<tr>
-									<td><label>Wiki </label></td>
-									<td><label id="lblWiki" /></td>
-								</tr>
-							</table>
-						</div>
-					</div>
+				<div class="row guess-container instruction-container">
+					<div class="col-lg-12">
+						<h1>Tips for Instructor/TA:</h1>
+							<p>	
+								For grading purpose: please play in "Fast Pace" mode. 
+								Check console for character's name!
+							</p>
 
+
+						<h1>Game Play Instruction</h1>
+						<p>
+							This game has <u><i>three</i></u> different mode. <br /><br />
+							<ul>
+								<li>Easy - 20 tries, 10 life</li>
+								<li>Intermediate - 12 tries, 10 life (DEFAULT)</li>
+								<li>Fast Pace - 10 tries, 10 life</li>
+							</ul>
+
+							<h2>Easy and Intermediate</h2>
+							<ul>
+								<li>If you guess the character correctly or used up all your guess chances, game will show character info after each guess. </li>
+								<li>Chocobo warks if you guessed a correct letter.</li>
+								<li>Chocobo (that yellow bird) will moves closer to cliff after each wrong guess and fell down the cliff and you lose a life. </li>
+								<li>After each guess, hit "y" to start the next character, "n" to quit game. </li>
+							</ul>
+							<br />
+							<h2>Fast Pace</h2>
+							<ul>
+								<li>Simple and clean, no chocobo, character introduction b.s. </li>
+							</ul>
+							<hr>
+							Navigation menu:
+								- Click on mode to change game play mode
+								- Click the audio hyperlink to toggle on/off background music.
+								- Click on <u>Game</u> to go back to game. 
+						</p>
+						<p>
+							
+						</p>
+
+					</div>
 			</div>
-			<div id="divCharInfo" style="visibility: hidden;" class="row">
-				<div class="col-md-6">
-					<div class="jumbotron text-center">
-						<img id="imgChar"/>
-					</div>		
-				</div>
-				<div class="col-md-6">
-
-				</div>
-			</div>		
 		</div>
 	</div>
 	<img src="assets/images/win.png" class="cover cover-hide" />
-	<img src="assets/images/lose.jpg" class="lose-cover  cover-hide" />
 	<!-- Copyright
 	<footer class="navbar page-footer text-center navbar-fixed-bottom">
 	    <div class="footer-copyright">
@@ -134,10 +117,7 @@
 	        </div>
 	    </div>
 	</footer> -->
-	<audio id="sndButton" src="assets/audio/button_click.wav" preload="auto"></audio>
-	<audio id="sndChocoboWark" src="assets/audio/chocobo_wark.mp3" preload="auto"></audio>
-	<audio id="sndCincoDeChocobo" src="assets/audio/cinco_de_chocobo.mp3" preload="auto"></audio>
-	
+
 
 	<!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -145,6 +125,5 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
 	crossorigin="anonymous"></script>
-	<script src="assets/javascript/game.js"> </script>
 </body>
 </html>

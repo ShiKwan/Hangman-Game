@@ -2,7 +2,7 @@ var gamePlay = {
 	mode : 1,
 	life : 10,
 	score : 0,
-	try : 10,
+	try : 15,
 	tips : 5,
 	randomCharacter : "",
 	charToGuess : "",
@@ -12,7 +12,7 @@ var character = new Array();
 var userGuessed = new Array();
 var initialLife = gamePlay.life;
 var initialTry = gamePlay.try;
-
+var forceGameOver = false;
 
 
 
@@ -122,44 +122,44 @@ var char8 = {
 var char9 = {
 	name: "squall",
 	fullname: "Squall Leonhart",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "The taciturn and reluctant hero. A lone wolf, he is known as a fearsome warrior in training, specializing in the rare gunblade. Though aloof and seemingly detached, he grows to appreciate his friends and love Rinoa, evolving into a model leader for his peers. His tagline is '...Whatever'.", 
+	img: "assets/images/squall.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/MoyEBlNafnQ" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Squall_Leonhart",
 	gif: ""
 
 }
 var char10 = {
 	name: "rinoa",
 	fullname: "Rinoa Heartilly",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "A beautiful and spirited young woman who abandoned a privileged lifestyle to join a resistance movement. Owns a faithful pet dog, Angelo.", 
+	img: "assets/images/rinoa.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/xZZIX781NmA" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Rinoa_Heartilly",
 	gif: ""
 
 }
 var char11 = {
 	name: "zell",
 	fullname: "Zell Dincht",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "A Balamb Garden student with unsurpassed martial arts skill who has a passion for hot dogs. In spite of his loud-mouthed attitude, Zell strives to be a model cadet.", 
+	img: "assets/images/zell.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/jWrAZhemws4" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Zell_Dincht",
 	gif: ""
 
 }
 var char12 = {
 	name: "selphie",
 	fullname: "Selphie Tilmitt",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "A spunky young woman with a carefree spirit. Transferred from Trabia Garden, she tends to overcompensate her sad past with a happy disposition.", 
+	img: "assets/images/selphie.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Wat6pTvSxlQ" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Selphie_Tilmitt",
 	gif: ""
 
 }
@@ -167,11 +167,11 @@ var char12 = {
 var char13 = {
 	name: "quistis",
 	fullname: "Quistis Trepe",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "A top-notch member of SeeD who serves as Squall's instructor. Though beautiful and popular, she is insecure. She overcomes this through her caring for Squall and her friends.", 
+	img: "assets/images/quistis.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/GE4IoKF0zKk" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Quistis_Trepe",
 	gif: ""
 
 }
@@ -179,11 +179,11 @@ var char13 = {
 var char14 = {
 	name: "irvine",
 	fullname: "Irvine Kinneas",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "An expert gunman and consummate ladies' man. Despite his facade, Irvine is determined, caring and sensitive man, and the only one who knows the hidden connection between all the members of the group.", 
+	img: "assets/images/irvine.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/hToyKXDDJlc" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Irvine_Kinneas",
 	gif: ""
 
 }
@@ -191,11 +191,11 @@ var char14 = {
 var char15 = {
 	name: "seifer",
 	fullname: "Seifer Almasy",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "Squall's rival in Garden and a fellow gunblade-wielder. His dream is to become a sorceress's knight as per fabled legends.", 
+	img: "assets/images/seifer.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/MoyEBlNafnQ" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Seifer_Almasy",
 	gif: ""
 
 }
@@ -203,11 +203,11 @@ var char15 = {
 var char16 = {
 	name: "laguna",
 	fullname: "Laguna Loire",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "A passionate man whose 'pen is truly mightier than the sword'. Despite disliking violence, he takes up arms in the face of injustice or when his loved ones are in peril.", 
+	img: "assets/images/laguna.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/wMtqLprlqno" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Laguna_Loire",
 	gif: ""
 
 }
@@ -215,11 +215,11 @@ var char16 = {
 var char17 = {
 	name: "kiros",
 	fullname: "Kiros Seagill",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "A Galbadian soldier who wields katals in battle. An intellectual and cool person, he is Laguna's best friend and the voice of reason within the group of friends.", 
+	img: "assets/images/kiros.jpg",
+	clip: 'N/A',
+	wiki: "http://finalfantasy.wikia.com/wiki/Kiros_Seagill",
 	gif: ""
 
 }
@@ -227,45 +227,131 @@ var char17 = {
 var char18 = {
 	name: "ward",
 	fullname: "Ward Zabac",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "A Galbadian soldier who wields a harpoon. Though intimidating at first glance, he is a caring individual and a most loyal friend to Laguna.", 
+	img: "assets/images/ward.jpg",
+	clip: 'N/A',
+	wiki: "http://finalfantasy.wikia.com/wiki/Ward_Zabac",
 	gif: ""
 }
 
 var char19 = {
 	name: "edea",
 	fullname: "Edea Kramer",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	game: "Final Fantasy 8",
+	bio: "A mysterious sorceress who surfaces as Galbadia's ally.", 
+	img: "assets/images/edea.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/YbgJwCtsaAM" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Edea_Kramer",
 	gif: ""
 
 }
 
 var char20 = {
-	name: "",
-	fullname: "",
-	game: "",
-	bio: "", 
-	img: "",
-	clip: '',
-	wiki: "",
+	name: "zidane",
+	fullname: "Zidane Tribal",
+	game: "Final Fantasy IX",
+	bio: "Zidane wields daggers as his primary weapons, and possesses Thief abilities such as Steal, Flee, Bandit, and Master Thief. He can also Sacrifice himself, and his Dyne Trance abilities further resemble Ninjutsu spell incantations associated with Ninjas.", 
+	img: "assets/images/zidane.png",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/C0vLOBFJpXI" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Zidane_Tribal",
 	gif: ""
 
 }
 
+var char21 = {
+	name: "vivi",
+	fullname: "Vivi Ornitier",
+	game: "Final Fantasy IX",
+	bio: "Vivi is a Black Mage, wielding staves with access to a host of damaging and enfeebling Black Magic, and the Trance ability Double Black, which lets him dualcast Black Magic.", 
+	img: "assets/images/vivi.jpg",
+	clip: '<iframe width="560" height="315" src="https://www.youtube.com/embed/xAuYSAGQxuA" frameborder="0" allowfullscreen></iframe>',
+	wiki: "http://finalfantasy.wikia.com/wiki/Vivi_Ornitier",
+	gif: ""
+
+}
+
+var char22 = {
+	name: "dagger",
+	fullname: "Garnet Til Alexandros XVII",
+	game: "Final Fantasy IX",
+	bio: "Dagger excels as a White Mage in the early game, but later gains access to a greater amount of eidolons than her Summoner counterpart, Eiko. Dagger's Trance strengthens her eidolons.", 
+	img: "assets/images/dagger.jpg",
+	clip: 'N/A',
+	wiki: "http://finalfantasy.wikia.com/wiki/Garnet_Til_Alexandros_XVII/Gameplay",
+	gif: ""
+
+}
+
+var char23 = {
+	name: "steiner",
+	fullname: "Adelbert Steiner",
+	game: "Final Fantasy IX",
+	bio: "Steiner is a Knight, and uses two-handed knight swords. He has the Dark Knight ability Darkside and incorporates elemental Black Magic into his Sword Magic attacks, like a Mystic Knight. He uses powerful offensive sword arts, and his Trance adds a heavy damage multiplier to his physical attacks.", 
+	img: "assets/images/steiner.jpg",
+	clip: 'N/A',
+	wiki: "http://finalfantasy.wikia.com/wiki/Adelbert_Steiner",
+	gif: ""
+
+}
+
+var char24 = {
+	name: "freya",
+	fullname: "Freya Crescent",
+	game: "Final Fantasy IX",
+	bio: "Freya wields spears and uses abilities such as Jump and Lancet, trademarks of the Dragoon job. Her Trance and exclusive ability High Jump further enhance Jump.", 
+	img: "assets/images/freya.jpg",
+	clip: 'N/A',
+	wiki: "http://finalfantasy.wikia.com/wiki/Freya_Crescent",
+	gif: ""
+
+}
+
+var char25 = {
+	name: "quina",
+	fullname: "Quina Quen",
+	game: "Final Fantasy IX",
+	bio: "Quina is a Blue Mage, learning Blue Magic by devouring monsters. Quina is the only character with access to the Thief ability Millionaire.", 
+	img: "assets/images/quina.jpg",
+	clip: 'N/A',
+	wiki: "http://finalfantasy.wikia.com/wiki/Quina_Quen",
+	gif: ""
+
+}
+
+var char26 = {
+	name: "amarant",
+	fullname: "Amarant Coral",
+	game: "Final Fantasy IX",
+	bio: "Amarant has a high HP stat, uses hand-to-hand claw weapons that teach him the Counter ability, and possesses Chakra and Aura techniques—trademarks of the Monk job. He can throw weapons like a Ninja, and use the Spare Change ability of Samurai. Unique abilities Power Up and Power Throw enhance Chakra and Throw skills, respectively.", 
+	img: "assets/images/amarant.jpg",
+	clip: 'N/A',
+	wiki: "http://finalfantasy.wikia.com/wiki/Amarant_Coral/Gameplay",
+	gif: ""
+
+}
+
+var char27 = {
+	name: "beatrix",
+	fullname: "Beatrix",
+	game: "Final Fantasy IX",
+	bio: "Beatrix uses most of the same offensive sword arts as Steiner except Darkside. Instead, she has access to many of the strongest White Magic spells, aligning her with the Paladin job.", 
+	img: "assets/images/beatrix.png",
+	clip: 'N/A',
+	wiki: "http://finalfantasy.wikia.com/wiki/Beatrix/Gameplay",
+	gif: ""
+
+}
+
+
+scoreAudio = new Audio("assets/audio/score.wav");
 backgroundAudio = new Audio("assets/audio/cinco_de_chocobo.mp3");
 chocoboWark = new Audio("assets/audio/chocobo_wark.mp3");
 backgroundAudio.addEventListener('ended', function() {
     this.currentTime = 0;
     this.play();
 }, false);
-//backgroundAudio.play();	
+backgroundAudio.play();	
 
 
 document.getElementById("navAudio").addEventListener("click", pauseAudio);
@@ -276,8 +362,6 @@ function pauseAudio(){
 		document.getElementById("navAudio").classList.remove('play');
 		document.getElementById("audio_on").style.display = "none";
 		document.getElementById("audio_mute").style.display = "inline";
-		/*document.getElementsByClassName("glyphicon-volume-down").addClass("hide");
-		document.getElementsByClassName("glyphicon-volume-off").addClass("hide");*/
 		backgroundAudio.pause();
 		backgroundAudio.currentTime = 0;
 	}else if(document.getElementById("navAudio").classList.contains('mute')){
@@ -285,15 +369,12 @@ function pauseAudio(){
 		document.getElementById("navAudio").classList.remove('mute');
 		document.getElementById("audio_on").style.display = "inline";
 		document.getElementById("audio_mute").style.display = "none";
-		/*document.getElementsByClassName("glyphicon-volume-off").addClass("hide");
-		document.getElementsByClassName("glyphicon-volume-down").addClass("hide");*/
 		backgroundAudio.play();	
 	}
 }
 
 function useTips(character, characterToGuess){
-	console.log("use tips");
-	console.log("character = " + character + ", character to guess = " + characterToGuess);
+
 	if(gamePlay.tips >0){
 		gamePlay.tips--;	
 		document.querySelector("#lblTips").innerHTML = gamePlay.tips;
@@ -303,7 +384,6 @@ function useTips(character, characterToGuess){
 		while(characterToGuess.indexOf(randomChar) > -1){
 			randomChar = character.charAt(Math.floor(Math.random() * character.length));
 		}
-		console.log("random Char : " + randomChar);
 		for(var i =0; i < characterToGuess.length; i++){
 
 			if(character[i].indexOf(randomChar)){
@@ -335,19 +415,18 @@ function createNewGuessChar(charLength){
 	}
 	return charToGuess;
 }
-function logArrayElements(element, index, array) {
-	console.log('a[' + index + '] = ' + element);
-}
+
 
 function easyMode(){
 	console.log("set to easy mode");
 	gamePlay.mode = 0;
 	gamePlay.try = initialTry = 20;
 	gamePlay.score = 0;
-
-	console.log("set try to " + gamePlay.try);
-	document.getElementById("lblTries").innerHTML = gamePlay.try;
+	gamePlay.life = initialLife = 10;
+	gamePlay.tips = 10;
 	document.querySelector("#lblTries").innerHTML = gamePlay.try;
+	document.querySelector("#lblLife").innerHTML = gamePlay.life;
+	document.querySelector("#lblTips").innerHTML = gamePlay.tips;
 	document.getElementById("easy").classList.add('active');
 	document.getElementById("med").classList.remove('active');
 	document.getElementById("hard").classList.remove('active');
@@ -358,9 +437,13 @@ function easyMode(){
 function mediumMode(){
 	console.log("set to medium mode");
 	gamePlay.mode = 1;
-	gamePlay.try = initialTry = 15;
+	gamePlay.try = initialTry = 12;
+	gamePlay.life = initialLife = 10;
 	gamePlay.score = 0;
+	gamePlay.tips = 5;
 	document.querySelector("#lblTries").innerHTML = gamePlay.try;
+	document.querySelector("#lblLife").innerHTML = gamePlay.life;
+	document.querySelector("#lblTips").innerHTML = gamePlay.tips;
 	document.getElementById("easy").classList.remove('active');
 	document.getElementById("med").classList.add('active');
 	document.getElementById("hard").classList.remove('active');
@@ -369,11 +452,16 @@ function mediumMode(){
 }
 
 function hardMode(){
-	console.log("set to hard mode");
+	console.log("set to fast pace mode");
 	gamePlay.mode = 2;
 	gamePlay.try = initialTry = 10;
+	gamePlay.life = initialLife = 10;
 	gamePlay.score = 0;
+	gamePlay.tips = 5;
+	document.querySelector(".bit-background-container").style.display = "none";
 	document.querySelector("#lblTries").innerHTML = gamePlay.try;
+	document.querySelector("#lblLife").innerHTML = gamePlay.life;
+	document.querySelector("#lblTips").innerHTML = gamePlay.tips;
 	document.getElementById("easy").classList.remove('active');
 	document.getElementById("med").classList.remove('active');
 	document.getElementById("hard").classList.add('active');
@@ -382,20 +470,19 @@ function hardMode(){
 }
 		
 function startGame(char){
-	if(char.length >= 0){
+	forceGameOver = false;
+	document.querySelector(".wrapper").classList.remove("wrapper-hide");
+	document.querySelector(".cover").classList.add("cover-hide");
+	if(character.length > 0){
 		//chocoboWark.play();
 		gamePlay.randomCharacter = char[Math.floor(Math.random() * char.length)];
-		logCharacter("Gameplay character: " + gamePlay.randomCharacter.name);
+		logCharacter( gamePlay.randomCharacter.name);
 		var index = char.indexOf(gamePlay.randomCharacter);
 		if(index > -1){
-			console.log("remove " + gamePlay.randomCharacter.name + " from array" );
-			console.log(char);
 			char.splice(index,1);
 		}
 		gamePlay.charToGuess = createNewGuessChar(gamePlay.randomCharacter.name.length);
-		console.log(gamePlay.charToGuess);
 		gamePlay.charLeft = gamePlay.charToGuess.length;
-		console.log("initial try: " + initialTry);
 		gamePlay.try = initialTry;
 		userGuessed = [];
 		$("#msg-center").hide()
@@ -408,12 +495,22 @@ function startGame(char){
 		document.querySelector("#lblGuessed").innerHTML = "[ ]";
 		document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ") ;
 		document.getElementById("divCharInfo").style.display = "none";
+		document.getElementById("msg-center").style.display = "none";
+	}else{
+		gameOver();
 	}
 }
 function gameOver(){
-	if(character == 0 ){
-	document.querySelector(".wrapper").classList.add("wrapper-hide");
-	document.querySelector(".cover").classList.remove("cover-hide");
+	
+	if(gamePlay.life == 0){
+		document.querySelector(".wrapper").classList.add("wrapper-hide");
+		document.querySelector(".lose-cover").classList.remove("cover-hide");
+	}
+	else if(character == 0 || forceGameOver == true ){
+		document.querySelector("#lblScore").innerHTML = gamePlay.score+1;
+		scoreAudio.play;
+		document.querySelector(".wrapper").classList.add("wrapper-hide");
+		document.querySelector(".cover").classList.remove("cover-hide");
 	}
 }
 
@@ -427,31 +524,46 @@ function storeCharacterInArray(){
 	character.push(char6);
 	character.push(char7);
 	character.push(char8);
+	character.push(char9);
+	character.push(char10);
+	character.push(char11);
+	character.push(char12);
+	character.push(char13);
+	character.push(char14);
+	character.push(char15);
+	character.push(char16);
+	character.push(char17);
+	character.push(char18);
+	character.push(char19);
+	character.push(char20);
+	character.push(char21);
+	character.push(char22);
+	character.push(char23);
+	character.push(char24);
+	character.push(char25);
+	character.push(char26);
+	character.push(char27);
 }
-
-//NOTES: 337 pixel background 
-
 
 
 logGamePlay(gamePlay);
 //Push each character into the array. 
 storeCharacterInArray()
 
-console.log(gamePlay.mode);
-console.log(gamePlay.life);
-console.log(gamePlay.score);
-
-logCharacter(character);
-console.log(character.length);
 var matchLost = false;
 startGame(character);
 
-
-if(gamePlay.life > 0) {
+	
+	
 	document.getElementById("hypTips").addEventListener("click", function(){
 		useTips(gamePlay.randomCharacter.name, gamePlay.charToGuess);	
 	},false);
+	if(gamePlay.life == 0){
+		forceGameOver = true;
+	}
+
 	document.onkeyup = function(event) {
+		if(gamePlay.life > 0) {
 		document.getElementById("imgWalkingChocobo").classList.remove('chocobo-hide');
 		document.getElementById("imgSleepingChocobo").classList.add('chocobo-hide');
 		document.getElementById("imgSleepingChocobo").classList.remove('slidedown');
@@ -464,7 +576,6 @@ if(gamePlay.life > 0) {
 			}
 			if(gamePlay.try == 0){
 				matchLost = true;
-				console.log("gameplay life is 0");
 				document.querySelector("#lblLife").innerHTML = gamePlay.life;
 				document.getElementById("msg-center").style.display = "block";
 				document.getElementById("msg-center").innerHTML = "Le chocobo went down the cliff into water.. <br /> Press 'y' to continue, 'n' to quit.  (y/n)";
@@ -472,12 +583,12 @@ if(gamePlay.life > 0) {
 					startGame(character);
 
 				}else if(event.key === "n"){
-					console.log("Thank you for playing!");
+					forceGameOver=true
+					gameOver();
 				}
 			}else 
 			if(matchLost == false){
 
-				console.log("here");
 
 				//if the letter appears in randomCharacter's name, and not in userGuessed
 				if(gamePlay.randomCharacter.name.indexOf(userGuess) > -1 && userGuessed.indexOf(userGuess) == -1){
@@ -499,8 +610,6 @@ if(gamePlay.life > 0) {
 					}
 
 					document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ");
-					console.log(gamePlay.charToGuess);
-					console.log("Character(s) left: " + gamePlay.charLeft);
 				}
 			
 				if(userGuessed.indexOf(userGuess) == -1 && gamePlay.randomCharacter.name.indexOf(userGuess) == -1){
@@ -519,10 +628,16 @@ if(gamePlay.life > 0) {
 				document.querySelector("#lblGuessed").innerHTML = "[ " + userGuessed.join(", ") + " ]";
 				}
 				if(gamePlay.try > 0){
-					console.log("Entered words: " + userGuessed);
 					if(gamePlay.charLeft == 0){
-						console.log("why twice");
-						console.log("You win!")
+						if(gamePlay.mode ==2){
+							gamePlay.score++;
+							scoreAudio.play;
+							matchLost = false;
+							document.querySelector("#lblScore").innerHTML = gamePlay.score;
+							startGame(character);
+							document.getElementById("msg-center").fadeOut
+						}else{
+
 						document.getElementById("divCharInfo").style.display = "block";
 						document.getElementById("imgChar").src = gamePlay.randomCharacter.img;
 						document.querySelector("#lblName").innerHTML = gamePlay.randomCharacter.fullname;
@@ -531,18 +646,17 @@ if(gamePlay.life > 0) {
 						document.getElementById("pClips").innerHTML = gamePlay.randomCharacter.clip;
 						document.getElementById("imgChar").src = gamePlay.randomCharacter.gif;
 						document.querySelector("#lblWiki").innerHTML = gamePlay.randomCharacter.wiki;
-
-						console.log(gamePlay.randomCharacter.bio);
-						console.log(gamePlay.randomCharacter.game);
 						logGamePlay(gamePlay);
 						document.getElementById("msg-center").style.display = "block";
+						document.getElementById("msg-center").classList.add('alert-success');
+						document.getElementById("msg-center").classList.remove('alert-danger');
 						document.getElementById("msg-center").fadeIn;
 						document.getElementById("msg-center").innerHTML =  "Press 'y' to continue, 'n' to quit.  (y/n)";
 						document.getElementById("msg-center").fadeIn;
-						console.log("Play again? (y/n)");
 						gameOver();
 						if(gamePlay.charLeft ==0 && (event.key === "y")){
 							gamePlay.score ++;
+							scoreAudio.play;
 							matchLost=false;
 							document.querySelector("#lblScore").innerHTML = gamePlay.score;
 							document.getElementById("imgWalkingChocobo").classList.remove('chocobo-hide');
@@ -552,112 +666,58 @@ if(gamePlay.life > 0) {
 							startGame(character);
 							document.getElementById("msg-center").fadeOut
 						}else if(gamePlay.charLeft ==0 && (event.key === "n")){
+							forceGameOver = true
 							gamePlay.score ++;
 							matchLost=false;
+							gameOver();
 							document.querySelector("#lblScore").innerHTML = gamePlay.score;
-							console.log("Thank you for playing!");
 						}
 					}
 				}
+				}
 				else if(gamePlay.try == 0 && matchLost == false){
-					console.log("gameplay try is 0");
-					gamePlay.life--;
-					document.querySelector("#lblLife").innerHTML = gamePlay.life;
-					document.getElementById("msg-center").style.display = "block";
-					document.getElementById("msg-center").fadeIn
-					document.getElementById("msg-center").innerHTML = "Le chocobo went down the cliff into water.. <br />Press 'y' to continue, 'n' to quit.  (y/n)";
-					gameOver();
-					if(event.key === "y"){
-						document.getElementById("imgWalkingChocobo").classList.remove('chocobo-hide');
-						document.getElementById("imgSleepingChocobo").classList.add('chocobo-hide');
-						document.getElementById("imgSleepingChocobo").classList.remove('slidedown');
-						$(".walking-chocobo").attr("style", "transform: translate(0px ,0 ); -webkit-transition: all 2s ease-in-out;");
-						document.getElementById("msg-center").fadeOut;
+					if(gamePlay.mode == 2){
+						gamePlay.life--;
+						document.querySelector("#lblLife").innerHTML = gamePlay.life;
 						startGame(character);
+					}else{
+						gamePlay.life--;
+						document.querySelector("#lblLife").innerHTML = gamePlay.life;
+						document.getElementById("divCharInfo").style.display = "block";
+						document.getElementById("imgChar").src = gamePlay.randomCharacter.img;
+						document.querySelector("#lblName").innerHTML = gamePlay.randomCharacter.fullname;
+						document.querySelector("#lblMore").innerHTML = gamePlay.randomCharacter.bio;
+						document.querySelector("#lblFrom").innerHTML = gamePlay.randomCharacter.game;
+						document.getElementById("pClips").innerHTML = gamePlay.randomCharacter.clip;
+						document.getElementById("imgChar").src = gamePlay.randomCharacter.gif;
+						document.querySelector("#lblWiki").innerHTML = gamePlay.randomCharacter.wiki;
 
-					}else if(event.key === "n"){
-						console.log("Thank you for playing!");12
+						document.getElementById("msg-center").style.display = "block";
+						document.getElementById("msg-center").classList.remove('alert-warning');
+						document.getElementById("msg-center").classList.add('alert-danger');
+						document.getElementById("msg-center").fadeIn
+						document.getElementById("msg-center").innerHTML = "Le chocobo went down the cliff into water.. <br />Press 'y' to continue, 'n' to quit.  (y/n)";
+						gameOver();
+						if(event.key === "y"){
+							document.getElementById("imgWalkingChocobo").classList.remove('chocobo-hide');
+							document.getElementById("imgSleepingChocobo").classList.add('chocobo-hide');
+							document.getElementById("imgSleepingChocobo").classList.remove('slidedown');
+							$(".walking-chocobo").attr("style", "transform: translate(0px ,0 ); -webkit-transition: all 2s ease-in-out;");
+							document.getElementById("msg-center").fadeOut;
+							startGame(character);
+
+						}else if(event.key === "n"){
+							forceGameOver = true;
+							gameOver();
+						}
 					}
 				}
 			}
 			
 		}	
 	}
+	else
+	{
+	gameOver();
+	}
 }
-
-
-
-/* 
-1. create an array of letters containing letters a - z
-  var letters = ["a", "b", "c", ...... "z"];
-
-2. pick a letter from array from step 1 randomly using .random()
-	var randomLetter = letters[(Math.floor(Math.random() * letters.length)];
-	
-
-3. create an on key up function. 
-	document.onkeyup = function(event) {
-		var userGuess = event.key.toLowerCase();
-
-		step 8
-		 step 9
-
-
-	}
-	
-
-4. create a variable to save the number of wins. 
-	var win = 0;
-	document.querySelector("#win").innerHTML = win;
-
-5. create a variable to save the number of losses.
-	var loss = 0;
-	document.querySelector("#loss").innerHTML = loss;	
-
-6. create a variable to save the number of guesses.
-	var guess = 5;
-	document.querySelector("#guess").innerHTML = guess;	
-
-7. create an array variable to save letters user typed. 
-	var guessedLetters = [];
-	document.querySelector("#gussedLetter").innerHTML = guessedLetters
-
-8. create an if statement to increase the win in step 4, and start the game again. 
-	if(userGuess === randomLetter ){
-		win = win + 1; 
-		randomLetter = letters[(Math.floor(Math.random() * letters.length)];
-		guess = 5;
-	}
-
-9. create another if statement to increase the loss count in step 5.
-	if(userGuess !== randomLetter ){
-	 // decrease the number of guess in step 6 by 1. 
-	 	// to prevent guess to go down to -1 -2 -3 .. onwards, we prevent the code to do tht by stoppign the guess to go down using if(guess > 0)
-		if(guess > 0){
-			//if guess is greater than 0, we decrease the count of guess by 1. 
-			guess = guess -1;
-		}
-
-		//if user runs out of guess3es. 
-		if (guess === 0 ){
-			//we  create the loss counter by 1. 
-			loss = loss +1;
-			//since user lost, we want to create a new random character for user to play again. 
-			randomLetter = letters[(Math.floor(Math.random() * letters.length)];
-			// refresh the count of guesses to 5. 
-			guess = 5;
-		}
-	 	
-
-	}
-guessing: a
-guessed: q, w, e, a
-
-guess chance : 2;
-		 4 3 2 1 0 -1 -2 
-
-5
-
-
-
-*/

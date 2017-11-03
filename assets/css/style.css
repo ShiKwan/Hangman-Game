@@ -19,7 +19,9 @@ nav {
    -moz-transition: opacity .25s ease-in-out;
    -webkit-transition: opacity .25s ease-in-out;
 }
-
+.glyphicon-heart{
+	color:red;
+}
 .jumbotron:hover{
 	opacity: 0.9;
 }
@@ -74,7 +76,7 @@ nav {
 	display: none;
 }
 
-.cover{
+.cover, .lose-cover{
   background-size: cover;
   position: fixed;
   height: 100%;
