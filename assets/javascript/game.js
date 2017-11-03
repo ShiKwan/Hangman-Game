@@ -13,171 +13,6 @@ var userGuessed = new Array();
 var initialLife = gamePlay.life;
 var initialTry = gamePlay.try;
 
-backgroundAudio = new Audio("assets/audio/cinco_de_chocobo.mp3");
-chocoboWark = new Audio("assets/audio/chocobo_wark.mp3");
-backgroundAudio.addEventListener('ended', function() {
-    this.currentTime = 0;
-    this.play();
-}, false);
-//backgroundAudio.play();	
-
-
-document.getElementById("navAudio").addEventListener("click", pauseAudio);
-
-function pauseAudio(){
-	if(document.getElementById("navAudio").classList.contains('play')){
-		document.getElementById("navAudio").classList.add('mute');
-		document.getElementById("navAudio").classList.remove('play');
-		document.getElementById("audio_on").style.display = "none";
-		document.getElementById("audio_mute").style.display = "inline";
-		/*document.getElementsByClassName("glyphicon-volume-down").addClass("hide");
-		document.getElementsByClassName("glyphicon-volume-off").addClass("hide");*/
-		backgroundAudio.pause();
-		backgroundAudio.currentTime = 0;
-	}else if(document.getElementById("navAudio").classList.contains('mute')){
-		document.getElementById("navAudio").classList.add('play');
-		document.getElementById("navAudio").classList.remove('mute');
-		document.getElementById("audio_on").style.display = "inline";
-		document.getElementById("audio_mute").style.display = "none";
-		/*document.getElementsByClassName("glyphicon-volume-off").addClass("hide");
-		document.getElementsByClassName("glyphicon-volume-down").addClass("hide");*/
-		backgroundAudio.play();	
-	}
-}
-
-function useTips(character, characterToGuess){
-	console.log("use tips");
-	console.log("character = " + character + ", character to guess = " + characterToGuess);
-	if(gamePlay.tips >0){
-		gamePlay.tips--;	
-		document.querySelector("#lblTips").innerHTML = gamePlay.tips;
-		var randomChar = "";
-		var randomChar = character.charAt(Math.floor(Math.random() * character.length));
-		//if letters already exist, look for another letter
-		while(characterToGuess.indexOf(randomChar) > -1){
-			randomChar = character.charAt(Math.floor(Math.random() * character.length));
-		}
-		console.log("random Char : " + randomChar);
-		for(var i =0; i < characterToGuess.length; i++){
-
-			if(character[i].indexOf(randomChar)){
-				characterToGuess[character.indexOf(randomChar)] = randomChar;
-			}
-		}
-		document.querySelector("#wordToGuess").innerHTML = characterToGuess.join(" ");
-	}else{
-		document.getElementById("msg-center").style.display = "block";
-		document.getElementById("msg-center").innerHTML =  "You are out of tips. ";
-	}
-}
-
-//log gameplay information
-function logGamePlay(gamePlay) {
-	console.log("GamePlay Log : " , gamePlay);
-}
-
-//log character information
-function logCharacter(char){
-	console.log(" Character Log :", char);
-}
-
-// create underscore "_" on the word to guess
-function createNewGuessChar(charLength){
-	var charToGuess = new Array();
-	for(var i = 0; i< charLength; i++){
-		charToGuess[i] = "_";
-	}
-	return charToGuess;
-}
-function logArrayElements(element, index, array) {
-	console.log('a[' + index + '] = ' + element);
-}
-
-function easyMode(){
-	console.log("set to easy mode");
-	gamePlay.mode = 0;
-	gamePlay.try = 20;
-	gamePlay.score = 0;
-	console.log("set try to " + gamePlay.try);
-	document.getElementById("easy").classList.add('active');
-	document.getElementById("med").classList.remove('active');
-	document.getElementById("hard").classList.remove('active');
-	storeCharacterInArray()
-	startGame(character);
-}
-
-function mediumMode(){
-	console.log("set to medium mode");
-	gamePlay.mode = 1;
-	gamePlay.try = 15;
-	gamePlay.score = 0;
-	document.getElementById("easy").classList.remove('active');
-	document.getElementById("med").classList.add('active');
-	document.getElementById("hard").classList.remove('active');
-	storeCharacterInArray()
-	startGame(character);
-}
-
-function hardMode(){
-	console.log("set to hard mode");
-	gamePlay.mode = 2;
-	gamePlay.try = 10;
-	gamePlay.score = 0;
-	document.getElementById("easy").classList.remove('active');
-	document.getElementById("med").classList.remove('active');
-	document.getElementById("hard").classList.add('active');
-	storeCharacterInArray()
-	startGame(character);
-}
-		
-function startGame(char){
-	if(char.length >= 0){
-		//chocoboWark.play();
-		gamePlay.randomCharacter = char[Math.floor(Math.random() * char.length)];
-		logCharacter("Gameplay character: " + gamePlay.randomCharacter.name);
-		var index = char.indexOf(gamePlay.randomCharacter);
-		if(index > -1){
-			console.log("remove " + gamePlay.randomCharacter.name + " from array" );
-			console.log(char);
-			char.splice(index,1);
-		}
-		gamePlay.charToGuess = createNewGuessChar(gamePlay.randomCharacter.name.length);
-		console.log(gamePlay.charToGuess);
-		gamePlay.charLeft = gamePlay.charToGuess.length;
-		gamePlay.try = initialTry;
-		userGuessed = [];
-		$("#msg-center").hide()
-		$("#msg-center").text = ""
-		document.getElementById("imgCharHead").src = gamePlay.randomCharacter.img;
-		document.querySelector("#lblTries").innerHTML = gamePlay.try;
-		document.querySelector("#lblTips").innerHTML = gamePlay.tips;
-		document.querySelector("#lblLife").innerHTML = gamePlay.life;
-		document.querySelector("#lblScore").innerHTML = gamePlay.score;
-		document.querySelector("#lblGuessed").innerHTML = "[ ]";
-		document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ") ;
-		document.getElementById("divCharInfo").style.display = "none";
-	}
-}
-function gameOver(){
-	if(character == 0 ){
-	document.querySelector(".wrapper").classList.add("wrapper-hide");
-	document.querySelector(".cover").classList.remove("cover-hide");
-	}
-}
-
-function storeCharacterInArray(){
-	character = [];
-	character.push(char1);
-	character.push(char2);
-	character.push(char3);
-	character.push(char4);
-	character.push(char5);
-	character.push(char6);
-	character.push(char7);
-	character.push(char8);
-}
-
-//NOTES: 337 pixel background 
 
 
 
@@ -283,6 +118,318 @@ var char8 = {
 	gif: "assets/images/vincent.gif"
 
 }
+
+var char9 = {
+	name: "squall",
+	fullname: "Squall Leonhart",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+var char10 = {
+	name: "rinoa",
+	fullname: "Rinoa Heartilly",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+var char11 = {
+	name: "zell",
+	fullname: "Zell Dincht",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+var char12 = {
+	name: "selphie",
+	fullname: "Selphie Tilmitt",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+
+var char13 = {
+	name: "quistis",
+	fullname: "Quistis Trepe",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+
+var char14 = {
+	name: "irvine",
+	fullname: "Irvine Kinneas",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+
+var char15 = {
+	name: "seifer",
+	fullname: "Seifer Almasy",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+
+var char16 = {
+	name: "laguna",
+	fullname: "Laguna Loire",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+
+var char17 = {
+	name: "kiros",
+	fullname: "Kiros Seagill",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+
+var char18 = {
+	name: "ward",
+	fullname: "Ward Zabac",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+}
+
+var char19 = {
+	name: "edea",
+	fullname: "Edea Kramer",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+
+var char20 = {
+	name: "",
+	fullname: "",
+	game: "",
+	bio: "", 
+	img: "",
+	clip: '',
+	wiki: "",
+	gif: ""
+
+}
+
+backgroundAudio = new Audio("assets/audio/cinco_de_chocobo.mp3");
+chocoboWark = new Audio("assets/audio/chocobo_wark.mp3");
+backgroundAudio.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+//backgroundAudio.play();	
+
+
+document.getElementById("navAudio").addEventListener("click", pauseAudio);
+
+function pauseAudio(){
+	if(document.getElementById("navAudio").classList.contains('play')){
+		document.getElementById("navAudio").classList.add('mute');
+		document.getElementById("navAudio").classList.remove('play');
+		document.getElementById("audio_on").style.display = "none";
+		document.getElementById("audio_mute").style.display = "inline";
+		/*document.getElementsByClassName("glyphicon-volume-down").addClass("hide");
+		document.getElementsByClassName("glyphicon-volume-off").addClass("hide");*/
+		backgroundAudio.pause();
+		backgroundAudio.currentTime = 0;
+	}else if(document.getElementById("navAudio").classList.contains('mute')){
+		document.getElementById("navAudio").classList.add('play');
+		document.getElementById("navAudio").classList.remove('mute');
+		document.getElementById("audio_on").style.display = "inline";
+		document.getElementById("audio_mute").style.display = "none";
+		/*document.getElementsByClassName("glyphicon-volume-off").addClass("hide");
+		document.getElementsByClassName("glyphicon-volume-down").addClass("hide");*/
+		backgroundAudio.play();	
+	}
+}
+
+function useTips(character, characterToGuess){
+	console.log("use tips");
+	console.log("character = " + character + ", character to guess = " + characterToGuess);
+	if(gamePlay.tips >0){
+		gamePlay.tips--;	
+		document.querySelector("#lblTips").innerHTML = gamePlay.tips;
+		var randomChar = "";
+		var randomChar = character.charAt(Math.floor(Math.random() * character.length));
+		//if letters already exist, look for another letter
+		while(characterToGuess.indexOf(randomChar) > -1){
+			randomChar = character.charAt(Math.floor(Math.random() * character.length));
+		}
+		console.log("random Char : " + randomChar);
+		for(var i =0; i < characterToGuess.length; i++){
+
+			if(character[i].indexOf(randomChar)){
+				characterToGuess[character.indexOf(randomChar)] = randomChar;
+			}
+		}
+		document.querySelector("#wordToGuess").innerHTML = characterToGuess.join(" ");
+	}else{
+		document.getElementById("msg-center").style.display = "block";
+		document.getElementById("msg-center").innerHTML =  "You are out of tips. ";
+	}
+}
+
+//log gameplay information
+function logGamePlay(gamePlay) {
+	console.log("GamePlay Log : " , gamePlay);
+}
+
+//log character information
+function logCharacter(char){
+	console.log(" Character Log :", char);
+}
+
+// create underscore "_" on the word to guess
+function createNewGuessChar(charLength){
+	var charToGuess = new Array();
+	for(var i = 0; i< charLength; i++){
+		charToGuess[i] = "_";
+	}
+	return charToGuess;
+}
+function logArrayElements(element, index, array) {
+	console.log('a[' + index + '] = ' + element);
+}
+
+function easyMode(){
+	console.log("set to easy mode");
+	gamePlay.mode = 0;
+	gamePlay.try = initialTry = 20;
+	gamePlay.score = 0;
+
+	console.log("set try to " + gamePlay.try);
+	document.getElementById("lblTries").innerHTML = gamePlay.try;
+	document.querySelector("#lblTries").innerHTML = gamePlay.try;
+	document.getElementById("easy").classList.add('active');
+	document.getElementById("med").classList.remove('active');
+	document.getElementById("hard").classList.remove('active');
+	storeCharacterInArray()
+	startGame(character);
+}
+
+function mediumMode(){
+	console.log("set to medium mode");
+	gamePlay.mode = 1;
+	gamePlay.try = initialTry = 15;
+	gamePlay.score = 0;
+	document.querySelector("#lblTries").innerHTML = gamePlay.try;
+	document.getElementById("easy").classList.remove('active');
+	document.getElementById("med").classList.add('active');
+	document.getElementById("hard").classList.remove('active');
+	storeCharacterInArray()
+	startGame(character);
+}
+
+function hardMode(){
+	console.log("set to hard mode");
+	gamePlay.mode = 2;
+	gamePlay.try = initialTry = 10;
+	gamePlay.score = 0;
+	document.querySelector("#lblTries").innerHTML = gamePlay.try;
+	document.getElementById("easy").classList.remove('active');
+	document.getElementById("med").classList.remove('active');
+	document.getElementById("hard").classList.add('active');
+	storeCharacterInArray()
+	startGame(character);
+}
+		
+function startGame(char){
+	if(char.length >= 0){
+		//chocoboWark.play();
+		gamePlay.randomCharacter = char[Math.floor(Math.random() * char.length)];
+		logCharacter("Gameplay character: " + gamePlay.randomCharacter.name);
+		var index = char.indexOf(gamePlay.randomCharacter);
+		if(index > -1){
+			console.log("remove " + gamePlay.randomCharacter.name + " from array" );
+			console.log(char);
+			char.splice(index,1);
+		}
+		gamePlay.charToGuess = createNewGuessChar(gamePlay.randomCharacter.name.length);
+		console.log(gamePlay.charToGuess);
+		gamePlay.charLeft = gamePlay.charToGuess.length;
+		console.log("initial try: " + initialTry);
+		gamePlay.try = initialTry;
+		userGuessed = [];
+		$("#msg-center").hide()
+		$("#msg-center").text = ""
+		document.getElementById("imgCharHead").src = gamePlay.randomCharacter.img;
+		document.querySelector("#lblTries").innerHTML = gamePlay.try;
+		document.querySelector("#lblTips").innerHTML = gamePlay.tips;
+		document.querySelector("#lblLife").innerHTML = gamePlay.life;
+		document.querySelector("#lblScore").innerHTML = gamePlay.score;
+		document.querySelector("#lblGuessed").innerHTML = "[ ]";
+		document.querySelector("#wordToGuess").innerHTML = gamePlay.charToGuess.join(" ") ;
+		document.getElementById("divCharInfo").style.display = "none";
+	}
+}
+function gameOver(){
+	if(character == 0 ){
+	document.querySelector(".wrapper").classList.add("wrapper-hide");
+	document.querySelector(".cover").classList.remove("cover-hide");
+	}
+}
+
+function storeCharacterInArray(){
+	character = [];
+	character.push(char1);
+	character.push(char2);
+	character.push(char3);
+	character.push(char4);
+	character.push(char5);
+	character.push(char6);
+	character.push(char7);
+	character.push(char8);
+}
+
+//NOTES: 337 pixel background 
 
 
 
@@ -437,3 +584,80 @@ if(gamePlay.life > 0) {
 		}	
 	}
 }
+
+
+
+/* 
+1. create an array of letters containing letters a - z
+  var letters = ["a", "b", "c", ...... "z"];
+
+2. pick a letter from array from step 1 randomly using .random()
+	var randomLetter = letters[(Math.floor(Math.random() * letters.length)];
+	
+
+3. create an on key up function. 
+	document.onkeyup = function(event) {
+		var userGuess = event.key.toLowerCase();
+
+		step 8
+		 step 9
+
+
+	}
+	
+
+4. create a variable to save the number of wins. 
+	var win = 0;
+	document.querySelector("#win").innerHTML = win;
+
+5. create a variable to save the number of losses.
+	var loss = 0;
+	document.querySelector("#loss").innerHTML = loss;	
+
+6. create a variable to save the number of guesses.
+	var guess = 5;
+	document.querySelector("#guess").innerHTML = guess;	
+
+7. create an array variable to save letters user typed. 
+	var guessedLetters = [];
+	document.querySelector("#gussedLetter").innerHTML = guessedLetters
+
+8. create an if statement to increase the win in step 4, and start the game again. 
+	if(userGuess === randomLetter ){
+		win = win + 1; 
+		randomLetter = letters[(Math.floor(Math.random() * letters.length)];
+		guess = 5;
+	}
+
+9. create another if statement to increase the loss count in step 5.
+	if(userGuess !== randomLetter ){
+	 // decrease the number of guess in step 6 by 1. 
+	 	// to prevent guess to go down to -1 -2 -3 .. onwards, we prevent the code to do tht by stoppign the guess to go down using if(guess > 0)
+		if(guess > 0){
+			//if guess is greater than 0, we decrease the count of guess by 1. 
+			guess = guess -1;
+		}
+
+		//if user runs out of guess3es. 
+		if (guess === 0 ){
+			//we  create the loss counter by 1. 
+			loss = loss +1;
+			//since user lost, we want to create a new random character for user to play again. 
+			randomLetter = letters[(Math.floor(Math.random() * letters.length)];
+			// refresh the count of guesses to 5. 
+			guess = 5;
+		}
+	 	
+
+	}
+guessing: a
+guessed: q, w, e, a
+
+guess chance : 2;
+		 4 3 2 1 0 -1 -2 
+
+5
+
+
+
+*/
